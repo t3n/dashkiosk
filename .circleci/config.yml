@@ -1,7 +1,8 @@
 version: 2.1
 
 aliases:
-  - &workspace_root ~/dashkiosk
+  - &workspace_root ~/workspace
+
   - &persist_to_workspace
     root: *workspace_root
     paths:
