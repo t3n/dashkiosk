@@ -1,0 +1,54 @@
+version: 2.1
+
+aliases:
+  - &workspace_root /dashkiosk
+  - &persist_to_workspace
+    root: *workspace_root
+    paths:
+      - entrypoint.sh
+      - Dockerfile
+  - &attach_workspace
+     at: *workspace_root
+
+orbs:
+  docker-image: t3n/docker-image@1.0
+
+jobs:
+  docker_build_and_push:
+    working_directory: *workspace_root
+    docker:
+      - image: google/cloud-sdk
+    steps:
+      - attach_workspace: *attach_workspace
+      - setup_remote_docker
+      - docker-image/gcr-build-and-push:
+          image: dashkiosk
+  docker_build_and_push_tag:
+    working_directory: *workspace_root
+    docker:
+      - image: google/cloud-sdk
+    steps:
+      - attach_workspace: *attach_workspace
+      - setup_remote_docker
+      - docker-image/gcr-build-and-push-tag:
+          image: dashkiosk
+
+workflows:
+  version: 2
+  build_and_push:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - test
+      - docker_build_and_push:
+          filters:
+            branches:
+              only:
+                - master
+          context: google
+          requires:
+            - build
