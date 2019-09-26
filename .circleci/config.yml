@@ -14,6 +14,17 @@ orbs:
   docker-image: t3n/docker-image@1.0
 
 jobs:
+  test:
+    working_directory: *workspace_root
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+    working_directory: *workspace_root
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
   docker_build_and_push:
     working_directory: *workspace_root
     docker:
@@ -37,6 +48,7 @@ workflows:
   version: 2
   build_and_push:
     jobs:
+      - test
       - build:
           filters:
             branches:
