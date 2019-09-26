@@ -44,13 +44,6 @@ workflows:
   build_and_push:
     jobs:
       - test
-      - build:
-          filters:
-            branches:
-              only:
-                - master
-          requires:
-            - test
       - docker_build_and_push:
           filters:
             branches:
@@ -58,4 +51,4 @@ workflows:
                 - master
           context: google
           requires:
-            - build
+            - test
