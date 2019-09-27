@@ -12,7 +12,7 @@ aliases:
 
 orbs:
   docker-image: t3n/docker-image@1.0
-  docker: circleci/docker@x.y.z
+  docker: circleci/docker@0.5.13
 
 jobs:
   test:
