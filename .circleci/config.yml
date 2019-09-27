@@ -12,6 +12,7 @@ aliases:
 
 orbs:
   docker-image: t3n/docker-image@1.0
+  docker: circleci/docker@x.y.z
 
 jobs:
   test:
@@ -27,8 +28,9 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - docker-image/gcr-build-and-push:
-          image: dashkiosk
+      - docker/publish:
+          image: $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
+          registry: quay.io/t3n/dashkiosk
 
 workflows:
   version: 2
