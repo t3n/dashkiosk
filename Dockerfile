@@ -5,7 +5,15 @@ RUN apk add --no-cache \
         make \
         g++ \
         alpine-sdk \
-        gifsicle libjpeg-turbo-dev optipng avahi avahi-dev avahi-compat-libdns_sd git autoconf automake nasm && \
+        gifsicle \
+        libjpeg-turbo-dev \
+        optipng avahi \
+        avahi-dev \
+        avahi-compat-libdns_sd \
+        git \
+        autoconf \
+        automake \
+        nasm && \
         npm install -g grunt
 
 WORKDIR /dashkiosk
